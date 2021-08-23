@@ -23,9 +23,7 @@ export const googleOauthCallbackRoute = {
       process.env.JWT_SECRET,
       (err, token) => {
         if (err) return res.sendStatus(500);
-        res.redirect(
-          `http://ec2-13-212-97-81.ap-southeast-1.compute.amazonaws.com/login?token=${token}`
-        );
+        res.redirect(`http://localhost:8080/login?token=${token}`);
       }
     );
   },

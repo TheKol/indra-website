@@ -54,7 +54,7 @@ export const signUpRoute = {
         recipientEmail: email,
         subject: `Please verify your email`,
         text: `Thanks for signing up! To verify your email, click here:
-        http://ec2-13-212-97-81.ap-southeast-1.compute.amazonaws.com/verify-email/${verificationString}
+        http://localhost:8080/verify-email/${verificationString}
         `,
       });
     } catch (e) {
