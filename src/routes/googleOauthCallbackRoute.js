@@ -24,7 +24,7 @@ export const googleOauthCallbackRoute = {
       (err, token) => {
         if (err) return res.sendStatus(500);
         res.redirect(
-          `ec2-13-212-97-81.ap-southeast-1.compute.amazonaws.com/login?token=${token}`
+          `http://ec2-13-212-97-81.ap-southeast-1.compute.amazonaws.com/login?token=${token}`
         );
       }
     );

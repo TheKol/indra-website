@@ -21,7 +21,7 @@ export const forgotPasswordRoute = {
           subject: 'Password Reset',
           text: `
             To reset your password, click this link:
-            ec2-13-212-97-81.ap-southeast-1.compute.amazonaws.com/reset-password/${passwordResetCode}
+            http://ec2-13-212-97-81.ap-southeast-1.compute.amazonaws.com/reset-password/${passwordResetCode}
           `,
         });
       } catch (e) {
