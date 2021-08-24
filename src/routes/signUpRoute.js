@@ -26,25 +26,14 @@ export const signUpRoute = {
     // verification string send to user
     const verificationString = uuid();
 
+    const pathConfig = process.env.PATH_CONFIG;
+
     // additional info about user
-    const startingInfo = {
-      hairColor: '',
-      favoriteFood: '',
-      bio: '',
-    };
-
-    // create new user in database
-    const result = await db.collection('users').insertOne({
-      email,
-      passwordHash,
-      salt,
-      info: startingInfo,
-      isVerified: false,
-      verificationString,
-    });
-
-    // get id from result
-    const { insertedId } = result;
+    // const startingInfo = {
+    //   hairColor: '',
+    //   favoriteFood: '',
+    //   bio: '',
+    // };
 
     // send verification email using sendEmail funct
     try {
@@ -52,13 +41,24 @@ export const signUpRoute = {
         recipientEmail: email,
         subject: `Please verify your email`,
         text: `Thanks for signing up! To verify your email, click here:
-        http://localhost:8080/verify-email/${verificationString}
+        http://${pathConfig}/verify-email/${verificationString}
         `,
       });
     } catch (e) {
-      console.log(e);
-      res.sendStatus(500);
+      return res.sendStatus(500);
     }
+    // create new user in database
+    const result = await db.collection('users').insertOne({
+      email,
+      passwordHash,
+      salt,
+      // info: startingInfo,
+      isVerified: false,
+      verificationString,
+    });
+
+    // get id from result
+    const { insertedId } = result;
 
     // generate JWT for all info except passwordHash
     jwt.sign(

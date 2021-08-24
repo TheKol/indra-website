@@ -8,6 +8,8 @@ export const googleOauthCallbackRoute = {
   handler: async (req, res) => {
     const { code } = req.query;
 
+    const pathConfig = process.env.PATH_CONFIG;
+
     const oauthUserInfo = await getGoogleUser({ code });
     const updatedUser = await updateOrCreateUserFromOauth({ oauthUserInfo });
     const { _id: id, isVerified, email, userName, userPicture } = updatedUser;
@@ -23,7 +25,7 @@ export const googleOauthCallbackRoute = {
       process.env.JWT_SECRET,
       (err, token) => {
         if (err) return res.sendStatus(500);
-        res.redirect(`http://localhost:8080/login?token=${token}`);
+        res.redirect(`http://${pathConfig}/login?token=${token}`);
       }
     );
   },

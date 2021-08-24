@@ -12,6 +12,8 @@ export const forgotPasswordRoute = {
     const user = await db.collection('users').findOne({ email });
     if (!user) return res.sendStatus(401);
 
+    const pathConfig = process.env.PATH_CONFIG;
+
     const passwordResetCode = uuid();
 
     const { result } = await db
@@ -25,7 +27,7 @@ export const forgotPasswordRoute = {
           subject: 'Password Reset',
           text: `
             To reset your password, click this link:
-            http://localhost:8080/reset-password/${passwordResetCode}
+            http://${pathConfig}/reset-password/${passwordResetCode}
           `,
         });
       } catch (e) {
