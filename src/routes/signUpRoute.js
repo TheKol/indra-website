@@ -15,9 +15,7 @@ export const signUpRoute = {
     const user = await db.collection('users').findOne({ email });
 
     // 409 conflic error code
-    if (user) {
-      res.sendStatus(409);
-    }
+    if (user) return res.sendStatus(409);
 
     const salt = uuid();
     const pepper = process.env.PAPPER_STRING;

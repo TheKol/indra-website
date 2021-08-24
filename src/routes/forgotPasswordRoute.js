@@ -7,7 +7,11 @@ export const forgotPasswordRoute = {
   method: 'put',
   handler: async (req, res) => {
     const { email } = req.params;
+
     const db = getDbConnection('react-auth-db');
+    const user = await db.collection('users').findOne({ email });
+    if (!user) return res.sendStatus(401);
+
     const passwordResetCode = uuid();
 
     const { result } = await db
