@@ -65,7 +65,7 @@ export const signUpRoute = {
       {
         id: insertedId,
         email,
-        info: startingInfo,
+        // info: startingInfo,
         isVerified: false,
       },
       //JSON web tokken secret
