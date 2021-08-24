@@ -7,11 +7,12 @@ export const forgotPasswordRoute = {
   method: 'put',
   handler: async (req, res) => {
     const { email } = req.params;
+
     const db = getDbConnection('react-auth-db');
     const user = await db.collection('users').findOne({ email });
-
-    // compare password from hash to db
     if (!user) return res.sendStatus(401);
+
+    const pathConfig = process.env.PATH_CONFIG;
 
     const passwordResetCode = uuid();
 
@@ -26,7 +27,7 @@ export const forgotPasswordRoute = {
           subject: 'Password Reset',
           text: `
             To reset your password, click this link:
-            http://ec2-13-212-97-81.ap-southeast-1.compute.amazonaws.com/reset-password/${passwordResetCode}
+            http://${pathConfig}/reset-password/${passwordResetCode}
           `,
         });
       } catch (e) {
