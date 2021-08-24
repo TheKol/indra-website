@@ -13,6 +13,7 @@ export const logInRoute = {
 
     // compare password from hash to db
     if (!user) return res.sendStatus(401);
+    if (!user.passwordHash) return res.sendStatus(401);
 
     const {
       _id: id,
