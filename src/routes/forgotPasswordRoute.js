@@ -8,6 +8,11 @@ export const forgotPasswordRoute = {
   handler: async (req, res) => {
     const { email } = req.params;
     const db = getDbConnection('react-auth-db');
+    const user = await db.collection('users').findOne({ email });
+
+    // compare password from hash to db
+    if (!user) return res.sendStatus(401);
+
     const passwordResetCode = uuid();
 
     const { result } = await db
