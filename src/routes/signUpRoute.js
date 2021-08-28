@@ -41,7 +41,7 @@ export const signUpRoute = {
         recipientEmail: email,
         subject: `Please verify your email`,
         text: `Thanks for signing up! To verify your email, click here:
-        http://${pathConfig}/verify-email/${verificationString}
+        https://${pathConfig}/verify-email/${verificationString}
         `,
       });
     } catch (e) {

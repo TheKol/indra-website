@@ -25,7 +25,7 @@ export const googleOauthCallbackRoute = {
       process.env.JWT_SECRET,
       (err, token) => {
         if (err) return res.sendStatus(500);
-        res.redirect(`http://${pathConfig}/login?token=${token}`);
+        res.redirect(`https://${pathConfig}/login?token=${token}`);
       }
     );
   },

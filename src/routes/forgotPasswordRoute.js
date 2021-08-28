@@ -27,7 +27,7 @@ export const forgotPasswordRoute = {
           subject: 'Password Reset',
           text: `
             To reset your password, click this link:
-            http://${pathConfig}/reset-password/${passwordResetCode}
+            https://${pathConfig}/reset-password/${passwordResetCode}
           `,
         });
       } catch (e) {
